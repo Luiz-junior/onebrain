@@ -1,0 +1,23 @@
+{
+  "dough": [
+    { "id": 1, "name": "nova-iorquina" },
+    { "id": 2, "name": "siciliana" },
+    { "id": 3, "name": "nopolitana" }
+  ],
+  "size": [
+    { "id": 1, "name": "P" },
+    { "id": 2, "name": "M" },
+    { "id": 3, "name": "G" }
+  ],
+  "stuffing": [
+    { "id": 1, "name": "Frango com Cheddar" },
+    { "id": 2, "name": "Bacon" },
+    { "id": 3, "name": "Carne seca" }
+  ],
+  "recommendation": [
+    { "id": 1, "name": "nova-iorquina" },
+    { "id": 2, "name": "siciliana" },
+    { "id": 3, "name": "nopolitana" }
+  ],
+  "order": [{ "id": 1, "idDough": 2, "size": "G", "idStuffing": 1 }]
+}
