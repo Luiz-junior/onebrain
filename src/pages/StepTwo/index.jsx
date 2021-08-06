@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Radio, Button } from "antd";
 
 import { OrderContext } from "../../contexts/OrderContext";
@@ -6,6 +6,8 @@ import { Container, Title, RadioContainer } from "./styles";
 
 function StepTwo({ history }) {
   const { order, setOrder, sizeList } = useContext(OrderContext);
+
+  const { location } = history;
 
   const handleChange = (e) => {
     setOrder({ ...order, size: e.target.value });
@@ -31,6 +33,9 @@ function StepTwo({ history }) {
           Continuar
         </Button>
       </RadioContainer>
+      <div style={{ marginTop: 10 }}>
+        {location.state.recommendSelected && "Você recebeu 20 pontos benefício"}
+      </div>
     </Container>
   );
 }

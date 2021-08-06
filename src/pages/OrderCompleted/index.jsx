@@ -1,17 +1,58 @@
-import React, { useContext, useEffect } from "react";
-import { Select } from "antd";
+import React, { useContext, useEffect, useState } from "react";
 
+import api from "../../services/api";
 import { OrderContext } from "../../contexts/OrderContext";
-// import { Container } from './styles';
+import { Container, Title, Subtitle, OrderDetails } from "./styles";
 
 function OrderCompleted() {
   const { order } = useContext(OrderContext);
 
+  const { dough, size, stuffing } = order;
+
+  const [orderSuccess, setOrderSuccess] = useState(false);
+  const [newOrder, setNewOrder] = useState();
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!newOrder) {
+      api
+        .post("/order", { dough, size, stuffing })
+        .then((res) => {
+          setNewOrder(res.data);
+          setOrderSuccess(true);
+        })
+        .catch((err) => setError(err));
+    }
+  }, []);
+
   return (
-    <div>
-      <h1>Pedido efetuado</h1>
-      <h2>Detalhes do pedido:</h2>
-    </div>
+    <Container>
+      {orderSuccess ? (
+        <>
+          <Title>Pedido efetuado</Title>
+          <Subtitle>Detalhes do pedido:</Subtitle>
+          <OrderDetails>
+            <span>
+              N°: <b>{newOrder.id}</b>
+            </span>
+            <span>
+              Massa: <b>{newOrder.dough}</b>
+            </span>
+            <span>
+              Tamanho: <b>{newOrder.size}</b>
+            </span>
+            <span>
+              Recheio: <b>{newOrder.stuffing}</b>
+            </span>
+          </OrderDetails>
+        </>
+      ) : (
+        <>
+          <Title>Ocorreu um erro :(</Title>
+          <Subtitle>{error}</Subtitle>
+        </>
+      )}
+    </Container>
   );
 }
 

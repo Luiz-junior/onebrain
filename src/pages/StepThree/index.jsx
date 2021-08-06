@@ -7,10 +7,6 @@ import { Container } from "./styles";
 function StepTwo() {
   const { order, setOrder, stuffingList, loading } = useContext(OrderContext);
 
-  useEffect(() => {
-    console.log("selecionado ", order);
-  }, [order]);
-
   const handleChange = (value) => {
     setOrder({ ...order, stuffing: value });
   };
@@ -18,9 +14,9 @@ function StepTwo() {
   return (
     <Container>
       <DefaultSelect
-        title="Escolha o tamanho"
+        title="Escolha o recheio"
         handleChange={handleChange}
-        listaData={stuffingList}
+        listData={stuffingList}
         textBtn="Finalizar pedido"
         nextPage="/order-completed"
         loading={loading}

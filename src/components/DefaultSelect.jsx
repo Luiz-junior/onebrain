@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Select, Button } from "antd";
 import { useHistory } from "react-router-dom";
@@ -10,9 +10,10 @@ const { Option } = Select;
 function DefaultSelect({
   title,
   handleChange,
-  listaData,
+  listData,
   textBtn,
   nextPage,
+  recommendSelected,
   loading,
 }) {
   const history = useHistory();
@@ -23,16 +24,16 @@ function DefaultSelect({
       <SelectContainer>
         <Select style={{ width: 180 }} onChange={handleChange}>
           {!loading &&
-            listaData.length &&
-            listaData.map((d) => (
-              <Option key={d.id} value={d.id}>
+            listData.length &&
+            listData.map((d) => (
+              <Option key={d.id} value={d.name}>
                 {d.name}
               </Option>
             ))}
         </Select>
         <Button
           type="primary"
-          onClick={() => history.push(nextPage)}
+          onClick={() => history.push(nextPage, { recommendSelected })}
           style={{ width: 180, marginTop: 10 }}
         >
           {textBtn}
@@ -45,7 +46,7 @@ function DefaultSelect({
 DefaultSelect.propTypes = {
   title: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
-  listaData: PropTypes.array.isRequired,
+  listData: PropTypes.array.isRequired,
   textBtn: PropTypes.string.isRequired,
   nextPage: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,

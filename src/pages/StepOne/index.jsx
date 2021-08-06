@@ -3,13 +3,14 @@ import React, { useContext, useEffect, useState } from "react";
 import api from "../../services/api";
 import { OrderContext } from "../../contexts/OrderContext";
 import DefaultSelect from "../../components/DefaultSelect";
-import { Container } from "./styles";
+import { Container, RecommendContainer } from "./styles";
 
 function StepOne() {
   const { order, setOrder, doughList, loading } = useContext(OrderContext);
 
   const [recommendationList, setRecommendationList] = useState([]);
   const [randomRecommendation, setRandomRecommendation] = useState({});
+  const [recommendationSelected, setRecommendationSelected] = useState(false);
 
   useEffect(() => {
     if (recommendationList.length > 0) {
@@ -18,8 +19,6 @@ function StepOne() {
       );
     }
   }, [recommendationList]);
-
-  console.log("randomRecommendation ", randomRecommendation);
 
   useEffect(() => {
     api
@@ -32,8 +31,14 @@ function StepOne() {
       });
   }, []);
 
-  const handleChange = (id) => {
-    setOrder({ ...order, id: 2, idDough: id });
+  const handleChange = (value) => {
+    setOrder({ ...order, dough: value });
+
+    if (value === randomRecommendation.name) {
+      setRecommendationSelected(true);
+    } else {
+      setRecommendationSelected(false);
+    }
   };
 
   return (
@@ -41,14 +46,15 @@ function StepOne() {
       <DefaultSelect
         title="Escolha a massa da pizza"
         handleChange={handleChange}
-        listaData={doughList}
+        listData={doughList}
         textBtn="Continuar"
         nextPage="/step-two"
+        recommendSelected={recommendationSelected}
         loading={loading}
       />
-      <div>
-        <b>Recomendação do dia: {randomRecommendation.name}</b>
-      </div>
+      <RecommendContainer>
+        Recomendação do dia: <b> {randomRecommendation.name}</b>
+      </RecommendContainer>
     </Container>
   );
 }

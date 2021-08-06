@@ -1,23 +1,83 @@
 {
   "dough": [
-    { "id": 1, "name": "nova-iorquina" },
-    { "id": 2, "name": "siciliana" },
-    { "id": 3, "name": "nopolitana" }
+    {
+      "id": 1,
+      "name": "nova-iorquina"
+    },
+    {
+      "id": 2,
+      "name": "siciliana"
+    },
+    {
+      "id": 3,
+      "name": "nopolitana"
+    }
   ],
   "size": [
-    { "id": 1, "name": "P" },
-    { "id": 2, "name": "M" },
-    { "id": 3, "name": "G" }
+    {
+      "id": 1,
+      "name": "P"
+    },
+    {
+      "id": 2,
+      "name": "M"
+    },
+    {
+      "id": 3,
+      "name": "G"
+    }
   ],
   "stuffing": [
-    { "id": 1, "name": "Frango com Cheddar" },
-    { "id": 2, "name": "Bacon" },
-    { "id": 3, "name": "Carne seca" }
+    {
+      "id": 1,
+      "name": "Frango com Cheddar"
+    },
+    {
+      "id": 2,
+      "name": "Bacon"
+    },
+    {
+      "id": 3,
+      "name": "Carne seca"
+    }
   ],
   "recommendation": [
-    { "id": 1, "name": "nova-iorquina" },
-    { "id": 2, "name": "siciliana" },
-    { "id": 3, "name": "nopolitana" }
+    {
+      "id": 1,
+      "name": "nova-iorquina"
+    },
+    {
+      "id": 2,
+      "name": "siciliana"
+    },
+    {
+      "id": 3,
+      "name": "nopolitana"
+    }
   ],
-  "order": [{ "id": 1, "idDough": 2, "size": "G", "idStuffing": 1 }]
+  "order": [
+    {
+      "dough": "siciliana",
+      "size": "G",
+      "stuffing": "Bacon",
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "dough": "siciliana",
+      "size": "M",
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "dough": "nova-iorquina",
+      "size": "M",
+      "stuffing": "Bacon",
+      "id": 5
+    }
+  ]
 }
