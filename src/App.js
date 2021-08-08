@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import "antd/dist/antd.css";
+import styles from "styled-components";
 
 import api from "./services/api";
 import { OrderProvider } from "./contexts/OrderContext";
@@ -10,8 +12,18 @@ import StepTwo from "./pages/StepTwo";
 import StepThree from "./pages/StepThree";
 import OrderCompleted from "./pages/OrderCompleted";
 
+const Container = styles.div`
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  max-width: 400px;
+
+`;
+
 function App() {
-  const [order, setOrder] = useState({});
+  const [orders, setOrders] = useState({});
   const [doughList, setDoughList] = useState([]);
   const [sizeList, setSizeList] = useState([]);
   const [stuffingList, setStuffingList] = useState([]);
@@ -59,8 +71,8 @@ function App() {
   }, [loading]);
 
   const valueProvider = {
-    order,
-    setOrder,
+    orders,
+    setOrders,
     doughList,
     setDoughList,
     sizeList,
@@ -71,16 +83,18 @@ function App() {
   };
 
   return (
-    <OrderProvider value={valueProvider}>
-      <Router>
-        <Switch>
-          <Route path="/" exact component={StepOne} />
-          <Route path="/step-two" component={StepTwo} />
-          <Route path="/step-three" component={StepThree} />
-          <Route path="/order-completed" component={OrderCompleted} />
-        </Switch>
-      </Router>
-    </OrderProvider>
+    <Container>
+      <OrderProvider value={valueProvider}>
+        <Router>
+          <Switch>
+            <Route path="/" exact component={StepOne} />
+            <Route path="/step-two" component={StepTwo} />
+            <Route path="/step-three" component={StepThree} />
+            <Route path="/order-completed" component={OrderCompleted} />
+          </Switch>
+        </Router>
+      </OrderProvider>
+    </Container>
   );
 }
 

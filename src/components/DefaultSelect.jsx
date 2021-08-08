@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Select, Button } from "antd";
 import { useHistory } from "react-router-dom";
@@ -18,11 +18,17 @@ function DefaultSelect({
 }) {
   const history = useHistory();
 
+  const [itemSelected, setItemSelected] = useState(false);
+
   return (
     <Container>
       <Title>{title}</Title>
       <SelectContainer>
-        <Select style={{ width: 180 }} onChange={handleChange}>
+        <Select
+          style={{ width: 180 }}
+          onChange={handleChange}
+          onSelect={() => setItemSelected(true)}
+        >
           {!loading &&
             listData.length &&
             listData.map((d) => (
@@ -35,6 +41,7 @@ function DefaultSelect({
           type="primary"
           onClick={() => history.push(nextPage, { recommendSelected })}
           style={{ width: 180, marginTop: 10 }}
+          disabled={!itemSelected}
         >
           {textBtn}
         </Button>

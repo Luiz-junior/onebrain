@@ -1,16 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Radio, Button } from "antd";
 
+import api from "../../services/api";
 import { OrderContext } from "../../contexts/OrderContext";
 import { Container, Title, RadioContainer } from "./styles";
 
 function StepTwo({ history }) {
-  const { order, setOrder, sizeList } = useContext(OrderContext);
+  const { orders, setOrders, sizeList } = useContext(OrderContext);
+
+  const [newPoints, setNewPoints] = useState(0);
+  const [itemSelected, setItemSelected] = useState(false);
 
   const { location } = history;
 
+  useEffect(() => {
+    api
+      .get("/benefit-points")
+      .then((res) => {
+        setNewPoints(res.data);
+      })
+      .catch((error) => {
+        console.log("error ", error);
+      });
+  }, []);
+
   const handleChange = (e) => {
-    setOrder({ ...order, size: e.target.value });
+    setOrders({ ...orders, size: e.target.value });
   };
 
   return (
@@ -21,7 +36,9 @@ function StepTwo({ history }) {
           {sizeList.length &&
             sizeList.map((d) => (
               <div key={d.id}>
-                <Radio value={d.name}>{d.name}</Radio>
+                <Radio value={d.name} onClick={() => setItemSelected(true)}>
+                  {d.name}
+                </Radio>
               </div>
             ))}
         </Radio.Group>
@@ -29,12 +46,17 @@ function StepTwo({ history }) {
           type="primary"
           onClick={() => history.push("/step-three")}
           style={{ width: 180, marginTop: 10 }}
+          disabled={!itemSelected}
         >
           Continuar
         </Button>
       </RadioContainer>
       <div style={{ marginTop: 10 }}>
-        {location.state.recommendSelected && "Você recebeu 20 pontos benefício"}
+        {location.state.recommendSelected && (
+          <span>
+            Você recebeu <b>{newPoints.quantity} pontos benefício </b>
+          </span>
+        )}
       </div>
     </Container>
   );

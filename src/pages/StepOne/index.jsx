@@ -6,7 +6,7 @@ import DefaultSelect from "../../components/DefaultSelect";
 import { Container, RecommendContainer } from "./styles";
 
 function StepOne() {
-  const { order, setOrder, doughList, loading } = useContext(OrderContext);
+  const { orders, setOrders, doughList, loading } = useContext(OrderContext);
 
   const [recommendationList, setRecommendationList] = useState([]);
   const [randomRecommendation, setRandomRecommendation] = useState({});
@@ -32,7 +32,7 @@ function StepOne() {
   }, []);
 
   const handleChange = (value) => {
-    setOrder({ ...order, dough: value });
+    setOrders({ ...orders, dough: value });
 
     if (value === randomRecommendation.name) {
       setRecommendationSelected(true);

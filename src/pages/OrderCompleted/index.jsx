@@ -5,9 +5,9 @@ import { OrderContext } from "../../contexts/OrderContext";
 import { Container, Title, Subtitle, OrderDetails } from "./styles";
 
 function OrderCompleted() {
-  const { order } = useContext(OrderContext);
+  const { orders } = useContext(OrderContext);
 
-  const { dough, size, stuffing } = order;
+  const { dough, size, stuffing } = orders;
 
   const [orderSuccess, setOrderSuccess] = useState(false);
   const [newOrder, setNewOrder] = useState();
@@ -16,7 +16,7 @@ function OrderCompleted() {
   useEffect(() => {
     if (!newOrder) {
       api
-        .post("/order", { dough, size, stuffing })
+        .post("/orders", { dough, size, stuffing })
         .then((res) => {
           setNewOrder(res.data);
           setOrderSuccess(true);

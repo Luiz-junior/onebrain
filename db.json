@@ -55,29 +55,16 @@
       "name": "nopolitana"
     }
   ],
-  "order": [
+  "benefit-points": {
+    "id": 1,
+    "quantity": 20
+  },
+  "orders": [
     {
       "dough": "siciliana",
       "size": "G",
       "stuffing": "Bacon",
       "id": 1
-    },
-    {
-      "id": 2
-    },
-    {
-      "dough": "siciliana",
-      "size": "M",
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "dough": "nova-iorquina",
-      "size": "M",
-      "stuffing": "Bacon",
-      "id": 5
     }
   ]
 }
